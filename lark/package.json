@@ -1,0 +1,17 @@
+{
+  "name": "lark-skill",
+  "version": "1.0.0",
+  "description": "Lark/Yuque integration skill",
+  "type": "module",
+  "scripts": {
+    "auth": "npx tsx scripts/auth.ts",
+    "api": "npx tsx scripts/api.ts"
+  },
+  "dependencies": {
+    "playwright": "^1.49.0"
+  },
+  "devDependencies": {
+    "tsx": "^4.7.0",
+    "@types/node": "^20.11.0"
+  }
+}

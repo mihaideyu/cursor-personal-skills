@@ -19,7 +19,7 @@ description: Generates monthly work reports from Yuque "XX月工作" and/or work
 
 - **知识库目录**：[2026 年目录](https://yuque.antfin.com/yixiu.zyx/bc447s/eiaor4zeuls16ifq)（namespace `yixiu.zyx`，book `bc447s`）。
 - **操作步骤**：见 [references/yuque_monthly_doc.md](references/yuque_monthly_doc.md)（`book_id`、`slug` 获取、`GET /api/docs/:slug`）。
-- **认证**：在用户主目录 `~` 执行 API 脚本；Cookie 见 `~/.claude/yuque_cookies.txt`；401 时运行 `npx tsx .claude/skills/lark/scripts/auth.ts`。
+- **认证**：在 **lark skill 根目录**（本仓库为 `lark/`，或你本机的 `~/.cursor/skills/lark` 等安装路径）执行 API 脚本；Cookie 位于该目录下 `.claude/yuque_cookies.txt`；401 时在同一目录执行 `npm i && npx tsx scripts/auth.ts`。
 
 ### 3. 提取「第 x 周周报」章节
 
@@ -66,5 +66,5 @@ description: Generates monthly work reports from Yuque "XX月工作" and/or work
 
 ## 依赖
 
-- **语雀**：`~/.claude/skills/lark/SKILL.md`
+- **语雀**：本仓库内 **`lark/SKILL.md`**（若单独安装 lark，则为该 skill 目录下的 `SKILL.md`）
 - **周报格式**：`工作总结/.cursor/rules/zhoubao-format.mdc`（若存在）

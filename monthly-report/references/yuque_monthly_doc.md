@@ -6,16 +6,18 @@
 - **book slug**：`bc447s`
 - **文档标题规范**：`{MM}月工作`，月份两位补零（如 `03月工作`、`12月工作`）
 
-## Cookie 与命令目录语雀 API 脚本从 `process.cwd()` 读 Cookie，**必须在用户主目录执行**：
+## Cookie 与命令目录
+
+语雀 API 脚本会依次尝试 **`process.cwd()`** 与 **lark skill 根目录**下的 `.claude/yuque_cookies.txt`。**推荐**在 **lark skill 根目录**执行（克隆本仓库时为 `cursor-personal-skills/lark/`，与 `package.json` 同级）；首次使用在该目录执行 `npm i && npx tsx scripts/auth.ts` 登录。
 
 ```bash
-cd ~
+cd lark   # 替换为你本机 lark skill 根目录
 ```
 
 ## 获取 `book_id`
 
 ```bash
-BOOK_ID=$(npx tsx .claude/skills/lark/scripts/get-book-id.ts \
+BOOK_ID=$(npx tsx scripts/get-book-id.ts \
   "https://yuque.antfin.com/yixiu.zyx/bc447s/eiaor4zeuls16ifq" 2>/dev/null)
 ```
 
@@ -26,7 +28,7 @@ BOOK_ID=$(npx tsx .claude/skills/lark/scripts/get-book-id.ts \
 **推荐**：`GET /api/recent/list`，限定文档、提高 limit，用 `jq` 按**精确标题**筛选：
 
 ```bash
-cd ~ && npx tsx .claude/skills/lark/scripts/api.ts GET "/api/recent/list" --limit=80 --type=Doc 2>/dev/null \
+npx tsx scripts/api.ts GET "/api/recent/list" --limit=80 --type=Doc 2>/dev/null \
   | jq -r '.data.list[] | select(.title == "03月工作") | {title, slug: .target.slug, book_id: .book_id}'
 ```
 
@@ -38,9 +40,8 @@ cd ~ && npx tsx .claude/skills/lark/scripts/api.ts GET "/api/recent/list" --limi
 ## 拉取正文
 
 ```bash
-cd ~
-# 假设 SLUG、BOOK_ID 已确定
-npx tsx .claude/skills/lark/scripts/api.ts GET "/api/docs/${SLUG}?book_id=${BOOK_ID}" 2>/dev/null \
+# 假设 SLUG、BOOK_ID 已确定（仍在 lark 根目录）
+npx tsx scripts/api.ts GET "/api/docs/${SLUG}?book_id=${BOOK_ID}" 2>/dev/null \
   | jq -r '.data | {title, content}'
 ```
 
@@ -48,4 +49,4 @@ npx tsx .claude/skills/lark/scripts/api.ts GET "/api/docs/${SLUG}?book_id=${BOOK
 
 ---
 
-详见通用语雀调用：`~/.claude/skills/lark/SKILL.md` 与 `references/lark_api.md`（与周报 skill 共用同一 lark 工具链）。
+详见通用语雀调用：本仓库 **`lark/SKILL.md`** 与 **`lark/references/lark_api.md`**（与周报 skill 共用同一 lark 工具链）。

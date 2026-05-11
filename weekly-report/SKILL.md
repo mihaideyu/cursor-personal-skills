@@ -68,5 +68,5 @@ description: Generates weekly work reports from Yuque monthly logs. Use when the
 
 ## 依赖
 
-- **语雀 skill**：拉取文档内容，见 `~/.claude/skills/lark/SKILL.md`
-- **Cookie**：语雀需已登录，Cookie 位于 `~/.claude/yuque_cookies.txt`
+- **语雀 skill**：拉取文档内容，见本仓库 **`lark/SKILL.md`**（或你本机 `lark` skill 安装目录下的 `SKILL.md`）
+- **Cookie**：语雀需已登录；Cookie 位于 **lark skill 根目录**下 `.claude/yuque_cookies.txt`（在该目录执行 `npm i && npx tsx scripts/auth.ts` 生成）
